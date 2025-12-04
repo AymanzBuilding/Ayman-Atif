@@ -2,444 +2,1023 @@
 <html lang="en">
 
 <head>
-    <!-- Meta Tags -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
 
-    <!-- Document Title -->
-    <title>Ayman Atif | Full-Stack Developer</title>
+    <!-- New Title Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Stylesheets & Font Awesome-->
-    <link rel="stylesheet" href="assets/styles/style.css">
-    <link rel="stylesheet" href="assets/styles/responsivness.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- General Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Syne', Arial, sans-serif;
+        }
+
+        .title-font {
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        section {
+            scroll-margin-block-start: 80px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .faq-section {
+            background: #fff;
+            /* gray-50 */
+            padding: 60px 0 80px 0;
+        }
+
+        .faq-wrapper {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            align-items: start;
+            /* FIX: Prevent vertical centering shift */
+        }
+
+        /* Left column */
+        .faq-left .faq-label {
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+
+        .faq-left .faq-title {
+            font-weight: 700;
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .faq-btn {
+            padding: 12px 24px;
+            background: black;
+            color: white;
+            border-radius: 50px;
+            border: none;
+        }
+
+        /* Right column */
+        .faq-right {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* FAQ Item */
+        .faq-item {
+            width: 100%;
+        }
+
+        .faq-item input {
+            display: none;
+        }
+
+        /* QUESTION BAR */
+        .faq-question {
+            display: block;
+            background: #eaeaf3;
+            padding: 22px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 550;
+            position: relative;
+            transition: background 0.3s;
+        }
+
+        /* expand arrow */
+        .faq-question::after {
+            content: "+";
+            position: absolute;
+            right: 24px;
+            font-size: 22px;
+            top: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        /* When expanded */
+        .faq-item input:checked+.faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        /* ANSWER */
+        .faq-answer {
+            background: rgb(246, 246, 255);
+            margin-top: -18px;
+            /* CONNECT body to bar */
+            padding: 0 22px;
+            border-radius: 0 0 40px 40px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.3s ease;
+        }
+
+        /* Expanded answer */
+        .faq-item input:checked~.faq-answer {
+            max-height: 300px;
+            padding: 28px 22px 22px;
+        }
+
+        @media (max-width:800px) {
+            .faq-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        header.main {
+            position: sticky;
+            top: 0;
+            z-index: 9999999999;
+            transition: background-color 0.4s ease,
+                padding 0.4s ease;
+        }
+
+        .bg-eaeaf3 {
+            background-color: #eaeaf3 !important;
+            padding-top: 10px !important;
+            padding-bottom: 10px !important;
+        }
+
+        #bgName .letter {
+            line-height: 1;
+        }
+
+        #bgName br {
+            display: block;
+            height: 0;
+        }
+
+        @media (max-width: 1000px) {
+            #bgName {
+                font-size: 200px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            #bgName {
+                font-size: 140px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            #bgName {
+                font-size: 100px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            #bgName {
+                font-size: 60px;
+                /* smaller for very small screens */
+            }
+        }
+
+        #mobileMenu a {
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        /* Staggered animation when menu opens */
+        #mobileMenu.show a:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        #mobileMenu.show a:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        #mobileMenu.show a:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        #mobileMenu.show a:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        #mobileMenu.show a:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+
+        #mobileMenu.show a:nth-child(6) {
+            transition-delay: 0.6s;
+        }
+
+        #mobileMenu.show a {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Optional: make links go back down quickly when menu closes */
+        #mobileMenu:not(.show) a {
+            transition-delay: 0s !important;
+            /* reset delays for closing */
+        }
+
+        @media (max-width: 768px) {
+            #contact {
+                padding-bottom: 0;
+            }
+
+            footer {
+                padding-top: 40px;
+            }
+
+            /* h1-h6, plus any custom title classes like .title-font */
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6,
+            .title-font {
+                font-size: 1.7rem !important;
+                /* adjust as needed */
+                line-height: 1.1rem;
+                /* optional for spacing */
+            }
+        }
+
+        /* INITIAL STATE */
+        .fade-group .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+
+        /* VISIBLE STATE */
+        .fade-group.visible .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 
-<body>
-    <!-- Header Wrapper ============================================================= -->
-    <div class="header-wrapper">
-        <header class="main">
-            <!-- Logo container -->
-            <div class="logo">Portify</div>
+<body class="bg-[#eaeaf3]">
 
-            <!-- Navigation -->
-            <nav>
-                <ul>
-                    <li><a style='cursor: pointer' class="active" data-href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+    <!-- HEADER -->
+    <header class="main w-full py-6 fixed top-0 left-0 z-50 bg-transparent">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
 
-            <!-- Hyperlinks -->
-            <a id="contact-btn" href="resume.html"><button type="button" class="cv-btn">Resume</button></a>
-            <a id="menu-btn" href="javascript:void(0)">
-                <button type="button" class="cv-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
+            <!-- LOGO / LEFT NAV (hidden on mobile) -->
+            <div class="bg-black py-3 px-6 rounded-full hidden md:flex">
+                <nav class="flex items-center gap-8 text-white font-semibold">
+                    <a href="#home" class="hover:text-gray-300 transition">Home</a>
+                    <a href="#services" class="hover:text-gray-300 transition">Services</a>
+                    <a href="#about" class="hover:text-gray-300 transition">About</a>
+                    <a href="#work" class="hover:text-gray-300 transition">Work</a>
+                    <a href="#testimonials" class="hover:text-gray-300 transition">Testimonials</a>
+                </nav>
+            </div>
+
+            <!-- HIRE ME BUTTON (hidden on mobile) -->
+            <a href="#contact"
+                class="hidden md:flex items-center gap-3 bg-white text-black p-1.5 pr-4 rounded-full shadow-md transition duration-300 hover:bg-gray-100 hover:scale-105 hover:shadow-xl">
+                <div
+                    class="w-10 h-10 flex items-center justify-center bg-black text-white rounded-full transition duration-300 hover:bg-white hover:text-black">
+                    <i class="bi bi-arrow-up-right"></i>
+                </div>
+                Hire Me
             </a>
 
-            <!-- Mobile nav version -->
-            <nav id="mobile-nav">
-                <!-- Logo container -->
-                <div class="logo">Portify</div>
+            <!-- MENU BUTTON (mobile only) -->
+            <button id="menuBtn" class="md:hidden text-black p-2 rounded-md focus:outline-none z-50">
+                <i class="bi bi-list text-3xl"></i>
+            </button>
 
-                <!-- Navigation -->
-                <ul>
-                    <li><a class="active" data-href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="resume.html">Resume</a></li>
-                </ul>
+        </div>
 
-                <!-- Hyperlink -->
-                <a id="contact-btn" href="resume.html">
-                    <button type="button" class="cv-btn">Resume</button>
-                </a>
-            </nav>
-        </header>
-
-        <!-- Placeholder for header animation on scrolling -->
-        <div class="header-placeholder"></div>
-
-        <!-- Home Section ============================================================== -->
-        <section id="home" class="home-section">
-            <!-- Greetings -->
-            <div class="mini-title">Greetings, I'm</div>
-
-            <!-- Full name -->
-            <div aria-colspan="title" class="animated-name">
-                <span>A</span><span>y</span><span>m</span><span>a</span><span>n</span>
-                <span class="outlined">A</span><span class="outlined">t</span><span class="outlined">i</span><span
-                    class="outlined">f</span>
-            </div>
-
-            <!-- Description -->
-            <div class="mini-title">crafting seamless <span>Full-Stack Solutions</span></div>
-
-            <!-- Buttons container -->
-            <div class="buttons">
-                <a href="#about">
-                    <button class="outline-btn">About Me</button>
-                </a>
-                <a href="#contact">
-                    <button class="filled-btn">Contact Me</button>
-                </a>
-            </div>
-        </section>
-        <!-- Home Section End ========================================================== -->
-    </div>
-    <!-- Header Wrapper End ========================================================= -->
+        <!-- MOBILE MENU -->
+        <div id="mobileMenu"
+            class="fixed inset-0 bg-black bg-opacity-95 flex flex-col items-center justify-center space-y-6 text-white text-2xl transform translate-y-full transition-transform duration-500 ease-in-out">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+            <a href="#work">Work</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Hire Me</a>
+        </div>
+    </header>
 
     <main>
-        <!-- About Section ============================================================== -->
-        <section id="about" class="about-section">
-            <div class="about-container">
-                <!-- Left side: image container -->
-                <div class="about-left">
-                    <div class="profile-wrapper">
-                        <div class="profile-rectangle"></div>
-                        <img src="assets/images/my-image.jpg" alt="Profile Picture" class="profile-img">
-                        <div class="profile-rectangle top"></div>
+        <section id="home" class="relative max-w-7xl mx-auto px-6 mt-24 text-center">
+
+            <!-- BACKGROUND NAME -->
+            <div id="bgName" class="absolute inset-0 flex items-center justify-center pointer-events-none select-none
+               text-[160px] md:text-[240px] font-extrabold text-gray-400 opacity-20 
+               tracking-tight title-font">
+                AYMAN
+            </div>
+
+            <!-- FOREGROUND HERO CONTENT -->
+            <div class="relative z-10">
+                <h1 class="title-font text-5xl md:text-6xl font-extrabold text-black leading-tight">
+                    Creative Developer<br />Crafting Modern Experiences
+                </h1>
+
+                <p class="mt-6 text-lg text-gray-700 max-w-xl mx-auto">
+                    I build visually polished and highly functional websites that blend performance, clarity, and great
+                    user
+                    experience.
+                </p>
+
+                <div class="flex justify-center">
+                    <a href="#services"
+                        class="mt-8 block w-auto self-center bg-black text-white px-10 py-3 rounded-full shadow-md transition hover:bg-gray-800 hover:scale-105">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="max-w-7xl mx-auto px-6 mt-32 pb-8">
+            <!-- TITLE + SUBTITLE -->
+            <div class="mb-16 fade-group">
+                <h2 class="fade-in text-4xl md:text-5xl font-extrabold text-left text-black title-font">My Services</h2>
+                <p class="fade-in mt-4 text-gray-700 max-w-xl ml-8">
+                    I provide a wide range of services, from web and mobile development to desktop solutions and SEO
+                    optimization.
+                </p>
+            </div>
+
+            <!-- FIRST ROW -->
+            <div class="flex flex-col md:flex-row gap-8 mb-8 fade-group">
+                <!-- CARD 1 (40%, white, left-aligned) -->
+                <div class="fade-in bg-white rounded-2xl p-8 flex flex-col justify-between w-full md:w-[40%]">
+                    <p class="text-gray-600 mb-8">Custom websites crafted with performance, accessibility, and
+                        scalability
+                        in mind. Great for startups and enterprises alike.</p>
+                    <div class="flex flex-wrap justify-between items-center">
+                        <h3 class="text-2xl font-bold">Web Development</h3>
+                        <span class="text-3xl font-extrabold text-gray-800">01</span>
+                    </div>
+                </div>
+
+                <!-- CARD 2 (60%, gradient, reversed content) -->
+                <div class="fade-in bg-gradient-to-br from-violet-500 to-purple-700 text-white rounded-2xl p-8 flex flex-col-reverse justify-between w-full md:w-[60%]"
+                    style="clip-path: polygon(0 0, calc(100% - 40px) 0, 100% 40px, 100% 100%, 0% 100%);">
+                    <div class="flex flex-wrap justify-between items-center md:flex-row-reverse">
+                        <h3 class="text-2xl font-bold">Desktop Applications</h3>
+                        <span class="text-3xl font-extrabold">02</span>
+                    </div>
+                    <p class="mb-8">Robust desktop apps for productivity, finance, and enterprise solutions, tailored to
+                        your needs.</p>
+                </div>
+            </div>
+
+            <!-- SECOND ROW -->
+            <div class="flex flex-col md:flex-row gap-8 fade-group">
+                <!-- CARD 3 (60%, gradient) -->
+                <div
+                    class="fade-in bg-gradient-to-br from-violet-500 to-purple-700 text-white rounded-2xl p-8 flex flex-col justify-between w-full md:w-[60%]">
+                    <p class="mb-8">Creating intuitive mobile applications for iOS and Android with great UX, smooth
+                        animations, and high performance.</p>
+                    <div class="flex flex-wrap justify-between items-center">
+                        <h3 class="text-2xl font-bold">Mobile Development</h3>
+                        <span class="text-3xl font-extrabold">03</span>
+                    </div>
+                </div>
+
+                <!-- CARD 4 (40%, white, reversed content) -->
+                <div class="fade-in bg-white rounded-2xl p-8 flex flex-col-reverse justify-between w-full md:w-[40%]"
+                    style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0% 100%);">
+                    <div class="flex flex-wrap justify-between items-center md:flex-row-reverse">
+                        <h3 class="text-2xl font-bold">Support & SEO</h3>
+                        <span class="text-3xl font-extrabold text-gray-800">04</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Ongoing support, website optimization, and SEO strategies for
+                        continuous
+                        growth and visibility.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="relative max-w-7xl mx-auto rounded-3xl bg-white px-6 py-24 overflow-hidden">
+
+            <!-- WATERMARK NAME -->
+            <div class="absolute inset-0 flex justify-center items-center pointer-events-none select-none">
+                <h1
+                    class="text-[150px] md:text-[200px] font-extrabold text-gray-300 opacity-20 transform -rotate-12 tracking-tight">
+                    AYMAN ATIF
+                </h1>
+            </div>
+
+            <!-- CONTENT OVER WATERMARK -->
+            <div class="relative z-10">
+
+                <!-- ABOUT TOP SECTION -->
+                <div class="relative z-10 mb-16 px-4 sm:px-6 md:px-16">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-6 items-center fade-group">
+
+                        <!-- LEFT : TITLE + DESCRIPTION -->
+                        <div class="text-center md:text-left">
+                            <h2 class="fade-in text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 title-font">
+                                About Me
+                            </h2>
+                            <p
+                                class="fade-in mt-6 text-base sm:text-lg md:text-xl text-gray-700 max-w-xl mx-auto md:mx-0">
+                                I’m Ayman Atif, a full-stack developer with expertise in web, desktop, and mobile
+                                applications.
+                                I combine creativity with functionality to deliver polished, high-performance projects.
+                                Over the years, I’ve tackled dozens of projects, always prioritizing clean code,
+                                scalability,
+                                and excellent user experience. I enjoy learning new technologies, optimizing workflows,
+                                and building solutions that help businesses grow.
+                            </p>
+                        </div>
+
+                        <!-- RIGHT : FLOATING IMAGE -->
+                        <div class="flex justify-center md:justify-end mt-10 md:mt-0 fade-in">
+                            <div class="relative w-40 h-40 sm:w-52 sm:h-52 md:w-64 md:h-64 lg:w-72 lg:h-72 
+                  animate-[float_5s_ease-in-out_infinite]">
+                                <img src="assets/images/ayman-atif.jpeg"
+                                    class="w-full h-full object-cover rounded-full shadow-2xl transition-all duration-700 hover:scale-105 hover:-rotate-2" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- SKILLS GRID -->
+                <div class="grid gap-6 
+            grid-cols-1 
+            sm:grid-cols-2 
+            md:grid-cols-3 
+            lg:grid-cols-4 
+            xl:grid-cols-6 fade-group">
+                    <!-- ROW 1 -->
+                    <div class="fade-in bg-purple-600 text-white rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative"
+                        style="clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);">
+                        <h4 class="font-bold text-lg mb-2">C#</h4>
+                        <p class="text-white text-sm">Full Stack & Desktop Apps</p>
                     </div>
 
-                    <p id="about-small-desc">Whether it's creating user-friendly websites, efficient desktop apps, or
-                        cutting-edge mobile
-                        solutions,
-                        my goal is to craft seamless experiences that help businesses and individuals achieve their
-                        goals.
+                    <div
+                        class="fade-in bg-white text-black rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative">
+                        <h4 class="font-bold text-lg mb-2">HTML</h4>
+                        <p class="text-gray-700 text-sm">Markup & Structure</p>
+                    </div>
+
+                    <div
+                        class="fade-in bg-purple-600 text-white rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative">
+                        <h4 class="font-bold text-lg mb-2">CSS</h4>
+                        <p class="text-white text-sm">Styling & Layout</p>
+                    </div>
+
+                    <div class="fade-in bg-white text-black rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative"
+                        style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);">
+                        <h4 class="font-bold text-lg mb-2">JavaScript</h4>
+                        <p class="text-gray-700 text-sm">Frontend & React</p>
+                    </div>
+
+                    <div
+                        class="fade-in bg-purple-600 text-white rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative">
+                        <h4 class="font-bold text-lg mb-2">SQL</h4>
+                        <p class="text-white text-sm">Databases & Queries</p>
+                    </div>
+
+                    <div
+                        class="fade-in bg-white text-black rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative">
+                        <h4 class="font-bold text-lg mb-2">MySQL</h4>
+                        <p class="text-gray-700 text-sm">Relational Databases</p>
+                    </div>
+
+                    <!-- ROW 2 (colors reversed) -->
+                    <div class="fade-in bg-white text-black rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative"
+                        style="clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%);">
+                        <h4 class="font-bold text-lg mb-2">Postgres</h4>
+                        <p class="text-gray-700 text-sm">Relational DB</p>
+                    </div>
+
+                    <div
+                        class="fade-in bg-violet-500 text-white rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative">
+                        <h4 class="font-bold text-lg mb-2">SQLite</h4>
+                        <p class="text-white text-sm">Lightweight DB</p>
+                    </div>
+
+                    <div
+                        class="fade-in bg-white text-black rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative">
+                        <h4 class="font-bold text-lg mb-2">Python</h4>
+                        <p class="text-gray-700 text-sm">Backend & Scripting</p>
+                    </div>
+
+                    <div class="fade-in bg-violet-500 text-white rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative"
+                        style="clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);">
+                        <h4 class="font-bold text-lg mb-2">.NET</h4>
+                        <p class="text-white text-sm">Backend & API</p>
+                    </div>
+
+                    <div
+                        class="fade-in bg-white text-black rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative">
+                        <h4 class="font-bold text-lg mb-2">Tailwind</h4>
+                        <p class="text-gray-700 text-sm">Responsive CSS</p>
+                    </div>
+
+                    <div
+                        class="fade-in bg-violet-500 text-white rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative">
+                        <h4 class="font-bold text-lg mb-2">Mobile Apps</h4>
+                        <p class="text-white text-sm">iOS & Android</p>
+                    </div>
+
+                    <!-- ROW 3 -->
+                    <div
+                        class="fade-in bg-purple-600 text-white rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative">
+                        <h4 class="font-bold text-lg mb-2">UI</h4>
+                        <p class="text-white text-sm">Design & Layout</p>
+                    </div>
+
+                    <div class="fade-in bg-white text-black rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative"
+                        style="clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);">
+                        <h4 class="font-bold text-lg mb-2">UX</h4>
+                        <p class="text-gray-700 text-sm">User Experience</p>
+                    </div>
+
+                    <div
+                        class="fade-in bg-purple-600 text-white rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative">
+                        <h4 class="font-bold text-lg mb-2">Frontend</h4>
+                        <p class="text-white text-sm">Web Interfaces</p>
+                    </div>
+
+                    <div
+                        class="fade-in bg-white text-black rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative">
+                        <h4 class="font-bold text-lg mb-2">Backend</h4>
+                        <p class="text-gray-700 text-sm">Server & APIs</p>
+                    </div>
+
+                    <div class="fade-in bg-purple-600 text-white rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative"
+                        style="clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%);">
+                        <h4 class="font-bold text-lg mb-2">Java</h4>
+                        <p class="text-white text-sm">Backend & Apps</p>
+                    </div>
+
+                    <div
+                        class="fade-in bg-white text-black rounded-3xl shadow-2xl h-32 p-6 flex flex-col justify-center relative">
+                        <h4 class="font-bold text-lg mb-2">Android Studio</h4>
+                        <p class="text-gray-700 text-sm">Mobile Development</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="work" class="w-full bg-neutral-900 text-white py-24 mt-8 fade-group">
+            <div class="max-w-3xl mx-auto text-center px-6">
+                <h2 class="fade-in text-5xl font-bold tracking-tight mb-6">Featured Work</h2>
+                <p class="fade-in text-gray-400 text-lg leading-relaxed">
+                    A curated collection of my personal projects and templates, demonstrating clean UI, smooth motion,
+                    and thoughtful product design. Each piece reflects years of experience in building modern,
+                    high-quality digital experiences.
+                </p>
+            </div>
+
+            <!-- PROJECT CONTAINER -->
+            <div class="max-w-6xl mx-auto mt-24 px-6 relative fade-in">
+
+                <!-- Random Floating Images Wrapper -->
+                <div class="relative h-[600px] md:h-[700px] lg:h-[800px]">
+
+                    <!-- Image 1 -->
+                    <img src="assets/images/luxedwell-1.jpg" class="absolute w-48 md:w-64 lg:w-72 rounded-2xl shadow-2xl 
+                  top-0 left-3 md:left-12 rotate-[2deg] hover:scale-105 transition-all" />
+
+                    <!-- Image 2 -->
+                    <img src="assets/images/luxedwell-2.jpg" class="absolute w-40 md:w-56 lg:w-64 rounded-2xl shadow-2xl 
+                  top-32 right-5 md:right-20 rotate-[-3deg] hover:scale-105 transition-all" />
+
+                    <!-- Image 3 -->
+                    <img src="assets/images/luxedwell-3.jpg" class="absolute w-48 md:w-64 lg:w-72 rounded-2xl shadow-2xl
+                  bottom-10 left-10 rotate-[4deg] hover:scale-105 transition-all" />
+
+                    <!-- Image 4 -->
+                    <img src="assets/images/luxedwell-4.jpg" class="absolute w-40 md:w-56 lg:w-64 rounded-2xl shadow-2xl
+                  bottom-0 right-12 rotate-[5deg] hover:scale-105 transition-all" />
+
+                    <!-- Image 5 (center hero image) -->
+                    <img src="assets/images/luxedwell-5.jpg"
+                        class="absolute w-56 md:w-72 lg:w-80 rounded-3xl shadow-2xl
+                  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-1deg] hover:scale-105 transition-all z-20" />
+
+                </div>
+
+                <!-- PROJECT TEXT + CTA -->
+                <div class="mt-20 text-center max-w-3xl mx-auto">
+                    <h3 class="text-4xl font-bold mb-4 tracking-tight fade-in">LuxeDwell Real Estate</h3>
+                    <p class="text-gray-300 leading-relaxed mb-8 fade-in">
+                        A premium real estate template blending beautiful UI, elegant spacing,
+                        and a smooth user flow. Designed to convert high-end clients with luxury imagery
+                        and modern layouts.
+                    </p>
+
+                    <a href="https://aymanbuilds.github.io/LuxeDwell/" target="_blank" class="fade-in inline-flex items-center gap-3 bg-white text-black px-7 py-3 rounded-full
+                hover:bg-neutral-200 transition-all shadow-lg">
+                        <span>Preview Project</span>
+                        <i class="bi bi-arrow-up-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="testimonials" class="py-24 fade-group">
+            <div class="max-w-7xl mx-auto px-6">
+
+                <!-- Section Title + Description -->
+                <div class="text-center mb-16">
+                    <h2 class="fade-in text-5xl font-extrabold mb-6 title-font">Testimonials</h2>
+                    <p class="fade-in mt-6 text-lg text-gray-700 max-w-xl mx-auto">
+                        Hear from clients who have trusted me with their projects and loved the results.
                     </p>
                 </div>
 
-                <!-- Right side: description -->
-                <div class="about-right">
-                    <div class="small-title">About Me</div>
-                    <h1 class="bigger-title">I craft seamless programming solutions with expertise across a wide range
-                        of
-                        technologies</h1>
-                    <p>With over 7 years of experience, I have been developing applications and solutions across diverse
-                        domains. My proficiency in a wide array of programming languages and frameworks allows me to
-                        build
-                        scalable and efficient full-stack applications. I specialize in:</p>
-                    <ul>
-                        <li>Desktop applications using .NET</li>
-                        <li>Web development with Flask, PHP, and .NET</li>
-                        <li>Mobile applications using Flutter and Android Studio (Native and Cross-Platform)</li>
-                        <li>Python development for data science, automation, and AI projects</li>
-                        <li>AI & Machine Learning solutions</li>
-                    </ul>
-                </div>
-            </div>
+                <!-- Testimonials Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            <!-- Cards container -->
-            <div class="cards-container">
-                <div class="cards-row">
-                    <div class="card odd">
-                        <i class="fas fa-desktop"></i>
-                        <div class="card-content">
-                            <div class="number">40+</div>
-                            <h3>Desktop Apps</h3>
-                            <p>Developed robust desktop solutions with rich functionality and intuitive interfaces,
-                                leveraging .NET and other technologies to deliver efficient and reliable systems.</p>
-                        </div>
-                    </div>
-                    <div class="card even">
-                        <i class="fas fa-laptop-code"></i>
-                        <div class="card-content">
-                            <div class="number">200+</div>
-                            <h3>Web Apps</h3>
-                            <p>Crafted dynamic and user-centric web applications using cutting-edge frameworks, ensuring
-                                seamless performance, responsiveness, and scalability for clients across diverse
-                                industries.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card odd">
-                        <i class="fas fa-mobile-alt"></i>
-                        <div class="card-content">
-                            <div class="number">50+</div>
-                            <h3>Android Apps</h3>
-                            <p>Designed native and cross-platform mobile apps using Flutter and Android Studio,
-                                providing
-                                seamless user experiences and top-tier performance for end users.</p>
-                        </div>
-                    </div>
-                    <div class="card even">
-                        <i class="fas fa-brain"></i>
-                        <div class="card-content">
-                            <div class="number">60+</div>
-                            <h3>AI Solutions</h3>
-                            <p>Implemented artificial intelligence solutions, including machine learning models,
-                                automation
-                                systems, and data-driven insights to transform business processes and decision-making.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- About Section End ========================================================== -->
-
-        <!-- Services Section =========================================================== -->
-        <section id="services" class="services-section">
-            <!-- Descriptive container -->
-            <div class="services-header-container">
-                <div class="cover"></div>
-                <h2>My Services</h2>
-            </div>
-
-            <!-- Services cards -->
-            <div class="services-cards-container">
-                <div class="transparent-card">
-                    <h3>Web Development</h3>
-                    <p>I specialize in crafting dynamic and user-centric web applications using ASP.NET, PHP, Flask, and
-                        Odoo. My solutions ensure scalability, responsiveness, and seamless performance tailored to
-                        diverse
-                        client needs.</p>
-                </div>
-                <div class="transparent-card">
-                    <h3>Mobile Development</h3>
-                    <p>From Flutter to Android Studio and Java, I develop cross-platform and native mobile applications
-                        that
-                        deliver excellent user experiences and top-notch functionality across devices.</p>
-                </div>
-                <div class="transparent-card">
-                    <h3>AI Solutions</h3>
-                    <p>With Python as my core tool, I create intelligent systems for automation, data analysis, and
-                        machine
-                        learning, offering cutting-edge solutions for modern challenges and opportunities.</p>
-                </div>
-            </div>
-
-            <!-- Skills Section -->
-            <div class="skills-row">
-                <!-- Left side: description -->
-                <div class="skills-left">
-                    <h3>My Expertise Across Technologies</h3>
-                    <p>I have extensive expertise in a wide array of technologies, including HTML, CSS, JavaScript,
-                        Flask,
-                        PHP, React, Odoo, .NET, Android Studio, Flutter, desktop applications using .NET and VBA,
-                        scripting,
-                        and Python. Here are some of my top skills:</p>
-                </div>
-
-                <!-- Right side: skills -->
-                <div class="skills-right">
-                    <div class="skill">
-                        <p>Web Development</p>
-                        <div>
-                            <div style="width: 100%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <p>Mobile Development</p>
-                        <div>
-                            <div style="width: 90%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <p>Desktop Development</p>
-                        <div>
-                            <div style="width: 100%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <p>AI Solutions</p>
-                        <div>
-                            <div style="width: 90%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Services Section End ======================================================= -->
-
-        <!-- Portfolio Szction ========================================================== -->
-        <section id="portfolio" class="portfolio-section">
-            <!-- Overlay for Fullscreen Image -->
-            <div id="image-overlay" class="overlay">
-                <div class="overlay-content">
-                    <img src="" alt="Fullscreen Image" id="overlay-image">
-                </div>
-            </div>
-
-            <!-- Descriptive container -->
-            <div class="portfolio-header">
-                <h2>Portfolio</h2>
-                <h3>(More Coming Soon)</h3>
-                <p>Take a look at some of my recent work showcasing my expertise across various domains.</p>
-            </div>
-
-            <div class="portfolio-container">
-                <!-- Navigation buttons -->
-                <button class="portfolio-btn prev-btn">Prev</button>
-
-                <!-- Image container with pulse and fade animations -->
-                <div class="portfolio-card">
-                    <div class="image-container">
-                        <img src="" alt="Project Image" class="portfolio-image">
-                    </div>
-                    <h3 class="project-title"></h3>
-                    <p class="project-description"></p>
-                </div>
-
-                <button class="portfolio-btn next-btn">Next</button>
-            </div>
-        </section>
-        <!-- Portfolio Section End ====================================================== -->
-
-        <!-- Testimonials Section ======================================================= -->
-        <section id="testimonials" class="testimonials">
-            <div class="testimonials-left">
-                <p class="main">Testimonials</p>
-                <h2>What do people say</h2>
-
-                <div class="testimonial-card-container">
-                    <!-- Individual testimonial cards -->
-                    <div class="testimonial-card active">
-                        <p>"I was looking for someone to help me manage my sales, so I reached out to Ayman. He managed
-                            to
-                            make me a comprehensive desktop application and an Android app. I'm glad I have worked with
-                            him,
-                            and I'll definitely return if I need help."</p>
-                        <h4>- William</h4>
-                    </div>
-                    <div class="testimonial-card">
-                        <p>"Thank you for helping me create an e-commerce website from end to end. Ayman was tasked with
-                            both front-end and back-end development alone and managed to achieve all my requirements."
+                    <!-- Testimonial Card 1 -->
+                    <div class="fade-in bg-gray-100 p-6 rounded-3xl transform rotate-[2deg]">
+                        <p class="text-gray-800 mb-4">
+                            "Ayman built a desktop app for our e-commerce store. It works perfectly, and we continue
+                            collaborating for ongoing support."
                         </p>
-                        <h4>- Esraa</h4>
+                        <h4 class="font-bold">Simon</h4>
                     </div>
-                    <div class="testimonial-card">
-                        <p>"Ayman helped me with several projects, C# projects, and mainly Odoo modules. He was flexible
-                            with time and an easygoing person. I'll be glad to work with him again."</p>
-                        <h4>- Muhammad</h4>
+
+                    <!-- Testimonial Card 2 -->
+                    <div class="fade-in bg-gray-100 p-6 rounded-3xl transform -rotate-[1deg]">
+                        <p class="text-gray-800 mb-4">
+                            "Ayman developed two Odoo modules for our business, fully compliant with UK trading
+                            regulations. Excellent results!"
+                        </p>
+                        <h4 class="font-bold">Naseem</h4>
+                    </div>
+
+                    <!-- Testimonial Card 3 -->
+                    <div class="fade-in bg-gray-100 p-6 rounded-3xl transform rotate-[1deg]">
+                        <p class="text-gray-800 mb-4">
+                            "He created a mobile app for our restaurant. We were thrilled with the results and continue
+                            receiving SEO support."
+                        </p>
+                        <h4 class="font-bold">Omar</h4>
+                    </div>
+
+                    <!-- Testimonial Card 4 -->
+                    <div class="fade-in bg-gray-100 p-6 rounded-3xl transform -rotate-[2deg]">
+                        <p class="text-gray-800 mb-4">
+                            "Ayman helped our startup develop an AI-driven news solution MVP. It worked flawlessly and
+                            met all our expectations."
+                        </p>
+                        <h4 class="font-bold">Veelio</h4>
+                    </div>
+
+                    <!-- Testimonial Card 5 -->
+                    <div class="fade-in bg-gray-100 p-6 rounded-3xl transform rotate-[1.5deg]">
+                        <p class="text-gray-800 mb-4">
+                            "He built an AI solution for our printing service. We were very satisfied with the quality
+                            and delivery."
+                        </p>
+                        <h4 class="font-bold">Daan</h4>
+                    </div>
+
+                    <!-- Testimonial Card 6 -->
+                    <div class="fade-in bg-gray-100 p-6 rounded-3xl transform -rotate-[1.5deg]">
+                        <p class="text-gray-800 mb-4">
+                            "Ayman created our website and handled SEO for our finance business. Exceptional work and
+                            very satisfied!"
+                        </p>
+                        <h4 class="font-bold">Susan</h4>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <div class="faq-wrapper">
+
+                <!-- LEFT COLUMN -->
+                <div class="faq-left">
+                    <p class="mt-6 text-lg text-gray-700 max-w-xl mx-auto">
+                        Common Questions
+                    </p>
+                    <h2 class="text-5xl font-extrabold title-font">My FAQ</h2>
+
+                    <div class="flex">
+                        <a href="#contact"
+                            class="block w-auto self-start mt-10 flex items-center gap-3 bg-transparent border-2 border-neutral-900 text-neutral-900 p-1.5 pr-3.5 rounded-full shadow-md transition-all duration-300 hover:bg-neutral-900 hover:text-white hover:scale-105 hover:shadow-xl">
+                            <div
+                                class="w-10 h-10 flex items-center justify-center bg-white text-neutral-900 rounded-full transition-all duration-300 hover:bg-neutral-900 hover:text-white">
+                                <i class="bi bi-arrow-up-right"></i>
+                            </div>
+                            Contact Me
+                        </a>
                     </div>
                 </div>
 
-                <!-- Navigation dots -->
-                <div class="testimonial-dots">
-                    <span class="dot active" data-index="0"></span>
-                    <span class="dot" data-index="1"></span>
-                    <span class="dot" data-index="2"></span>
+                <!-- RIGHT COLUMN -->
+                <div class="faq-right">
+
+                    <!-- FAQ 1 -->
+                    <div class="faq-item">
+                        <input type="checkbox" id="faq1">
+                        <label class="faq-question" for="faq1">What services do you offer?</label>
+                        <div class="faq-answer">
+                            I provide end-to-end development solutions including web, desktop, and mobile applications,
+                            as well as ongoing support, SEO, and optimization.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="faq-item">
+                        <input type="checkbox" id="faq2">
+                        <label class="faq-question" for="faq2">How do you price your projects?</label>
+                        <div class="faq-answer">
+                            Pricing depends on the project’s complexity and scope. I provide detailed quotes after
+                            understanding your requirements and goals.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="faq-item">
+                        <input type="checkbox" id="faq3">
+                        <label class="faq-question" for="faq3">What is your typical project timeline?</label>
+                        <div class="faq-answer">
+                            Timelines vary based on the type and size of the project. Smaller projects can take a few
+                            weeks, while larger solutions may take several months. I always provide a clear schedule
+                            upfront.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="faq-item">
+                        <input type="checkbox" id="faq4">
+                        <label class="faq-question" for="faq4">Do you offer post-launch support?</label>
+                        <div class="faq-answer">
+                            Yes, I offer maintenance, bug fixes, and ongoing support to ensure your application runs
+                            smoothly and stays up to date.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 5 -->
+                    <div class="faq-item">
+                        <input type="checkbox" id="faq5">
+                        <label class="faq-question" for="faq5">Which technologies do you specialize in?</label>
+                        <div class="faq-answer">
+                            I specialize in full-stack development using C#, .NET, Python, JavaScript, React, Tailwind
+                            CSS, SQL/NoSQL databases, and mobile development for iOS and Android.
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <div class="testimonials-right"></div>
         </section>
-        <!-- Testimonials Section End =================================================== -->
 
-        <!-- Contact Section ============================================================ -->
-        <section id="contact" class="contact-section">
-            <!-- Descriptive container -->
-            <div>
-                <h2>Contact</h2>
-                <p>If you need assistance or would like to create a project together, feel free to reach out to me. I'm
-                    always
-                    open to new opportunities and collaborations!</p>
-            </div>
+        <section id="contact" class="bg-neutral-900 text-white py-24">
+            <div class="max-w-6xl mx-auto px-6">
 
-            <!-- Contact cards -->
-            <div class="contact-container">
-                <a href="https://instagram.com/aoxt_9" target="_blank">
-                    <div class="contact-phone" id="instagram">
-                        <img src="assets/icons/instagram.png" alt="Instagram">
-                        <p>@aoxt_9</p>
+                <h2 class="text-5xl font-extrabold mb-6 title-font text-center">
+                    Let's Make Something<br>Amazing Together
+                </h2>
+
+                <div class="flex flex-col md:flex-row md:divide-x md:divide-neutral-700 text-center mt-16">
+
+                    <!-- Item -->
+                    <div class="flex-1 px-8 py-10">
+                        <h4 class="text-sm text-neutral-400 mb-2 tracking-wide uppercase">Whatsapp</h4>
+                        <p class="text-xl font-medium max-w-xs mx-auto leading-relaxed">
+                            <a href="https://wa.me/212688459384?text=Hi!" target="_blank">+212 688-459384</a>
+                        </p>
                     </div>
-                </a>
 
-                <a href="https://wa.me/212688459384" target="_blank">
-                    <div class="contact-phone" id="whatsapp">
-                        <img src="assets/icons/whatsapp.png" alt="WhatsApp">
-                        <p>(212)<br>688459384</p>
+                    <!-- Item -->
+                    <div class="flex-1 px-8 py-10">
+                        <h4 class="text-sm text-neutral-400 mb-2 tracking-wide uppercase">Email Address</h4>
+                        <p class="text-xl font-medium max-w-xs mx-auto leading-relaxed">
+                            <a href="mailto:a95yman@gmail.com" target="_blank">a95yman@gmail.com</a>
+                        </p>
                     </div>
-                </a>
 
-                <a href="mailto:a95yman@gmail.com" target="_blank">
-                    <div class="contact-phone" id="gmail">
-                        <img src="assets/icons/gmail.png" alt="Gmail">
-                        <p>a95yman@gmail.com</p>
+                    <!-- Item -->
+                    <div class="flex-1 px-8 py-10">
+                        <h4 class="text-sm text-neutral-400 mb-2 tracking-wide uppercase">Linkedin</h4>
+                        <p class="text-xl font-medium max-w-xs mx-auto leading-relaxed">
+                            <a href="https://www.linkedin.com/in/a95yman/">@a95yman</a>
+                        </p>
                     </div>
-                </a>
 
-                <a href="https://linkedin.com/in/a95yman" target="_blank">
-                    <div class="contact-phone" id="linkedin">
-                        <img src="assets/icons/linkedin.png" alt="LinkedIn">
-                        <p>@a95yman</p>
-                    </div>
-                </a>
+                </div>
+
             </div>
         </section>
-        <!-- Contact Section End ======================================================== -->
+
+        <footer class="bg-neutral-900 text-white pb-20">
+            <div class="max-w-6xl mx-auto px-6">
+
+                <!-- Menu -->
+                <nav class="flex flex-wrap justify-center gap-8 text-sm mb-14 text-neutral-300">
+                    <a href="#home" class="hover:text-gray-300 transition">Home</a>
+                    <a href="#services" class="hover:text-gray-300 transition">Services</a>
+                    <a href="#about" class="hover:text-gray-300 transition">About</a>
+                    <a href="#work" class="hover:text-gray-300 transition">Work</a>
+                    <a href="#testimonials" class="hover:text-gray-300 transition">Testimonials</a>
+                </nav>
+
+                <!-- Main Footer CTA -->
+                <div class="text-center max-w-2xl mx-auto">
+                    <h3 class="text-3xl font-semibold mb-4">
+                        Your Ideas, My Code, Amazing Results.
+                    </h3>
+                    <p class="text-neutral-300 text-lg leading-relaxed mb-8">
+                        I specialize in web, desktop, and mobile applications, delivering modern, high-quality
+                        solutions. Let’s collaborate to turn your ideas into reality.
+                    </p>
+
+                    <div class="flex">
+                        <a href="https://wa.me/212688459384?text=Hi!" target="_blank"
+                            class="w-auto self-center mt-6 flex items-center gap-3 bg-neutral-900 text-white p-1.5 pr-3.5 rounded-full shadow hover:bg-neutral-800 transition mx-auto border border-neutral-700">
+                            <div
+                                class="w-10 h-10 flex items-center justify-center bg-white text-neutral-900 rounded-full">
+                                <i class="bi bi-arrow-up-right"></i>
+                            </div>
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
     </main>
 
-    <!-- Page Footer ================================================================ -->
-    <footer>
-        <div class="footer-container">
-            <!-- Left side: Page name and description -->
-            <div class="footer-left">
-                <div>Portify</div>
-                <p>Your go-to platform for showcasing awesome projects and connecting with professionals.</p>
-            </div>
+    <script>
+        const bgName = document.getElementById('bgName');
+        const rawText = bgName.textContent || '';          // read whatever the user put
+        const words = rawText.trim().split(/\s+/);        // split by any whitespace (spaces, tabs, newlines)
 
-            <!-- Middle: Navigation list -->
-            <div class="footer-middle">
-                <h3>Navigation</h3>
-                <ul>
-                    <li><a data-href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                </ul>
-            </div>
+        // Wrap each word's letters in spans, then join words with <br>
+        const html = words.map((word) => {
+            return Array.from(word).map(char => {
+                return `<span class="letter">${char}</span>`;
+            }).join('');
+        }).join('<br>');
 
-            <!-- Right side: Social media icons -->
-            <div class="footer-right">
-                <h3>Follow Me</h3>
-                <div class="footer-social-icons">
-                    <a href="https://instagram.com/aoxt_9" target="_blank" class="footer-social-icon instagram"></a>
-                    <a href="https://wa.me/212688459384" target="_blank" class="footer-social-icon whatsapp"></a>
-                    <a href="mailto:a95yman@gmail.com" target="_blank" class="footer-social-icon gmail"></a>
-                    <a href="https://linkedin.com/in/a95yman" target="_blank" class="footer-social-icon linkedin"></a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Page Footer End ============================================================ -->
+        bgName.innerHTML = html;
 
-    <!-- Fixed Social Icons Container =============================================== -->
-    <div class="social-container">
-        <a href="https://wa.me/212688459384" target="_blank">
-            <div class="social-icon">
-                <i class="fab fa-whatsapp"></i>
-            </div>
-        </a>
-        <a href="https://instagram.com/aoxt_9" target="_blank">
-            <div class="social-icon">
-                <i class="fab fa-instagram"></i>
-            </div>
-        </a>
-        <a href="https://linkedin.com/in/a95yman" target="_blank">
-            <div class="social-icon">
-                <i class="fab fa-linkedin-in"></i>
-            </div>
-        </a>
-        <a href="mailto:a95yman@gmail.com" target="_blank">
-            <div class="social-icon">
-                <i class="fab fa-google"></i>
-            </div>
-        </a>
-    </div>
-    <!-- Fixed Social Icons Container End============================================ -->
+        const letters = bgName.querySelectorAll('.letter');
 
-    <!-- Scripts -->
-    <script src="assets/scripts/main.js"></script>
+        // initial inline style for smoother transitions
+        letters.forEach(letter => {
+            letter.style.display = 'inline-block';
+            letter.style.transition = 'transform 0.45s cubic-bezier(.22,.9,.31,1), filter 0.45s ease';
+            letter.style.willChange = 'transform, filter';
+        });
+
+        let scrollTimeout;
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+
+            letters.forEach((letter, i) => {
+                // Determine which word the letter belongs to so the second line doesn't get tiny delays or offsets weirdly
+                // We'll use per-letter index but reset an offset multiplier at word boundaries
+                // Simpler: compute wordIndex by counting preceding <br>s via DOM traversal
+                let node = letter;
+                let wordIndex = 0;
+                while (node.previousSibling) {
+                    node = node.previousSibling;
+                    if (node.nodeName === 'BR') wordIndex++;
+                }
+
+                // Stagger: base delay per word + per-letter increment
+                const wordBaseDelay = wordIndex * 0.02;     // second word starts a little later overall
+                const letterDelay = (i % 30) * 0.06;        // mod keeps numbers sensible across long strings
+                const delay = (wordBaseDelay + letterDelay);
+
+                // Movement: letters in later positions move a bit more; second word slightly different factor
+                const wordFactor = 0.18 + wordIndex * 0.06;
+                const indexFactor = (i % 30) * 0.012;
+                const offset = scrollY * (wordFactor + indexFactor) + 200;
+
+                // Blur: scaled by scroll and slightly by letter index for variety
+                const blur = Math.min(scrollY / (30 + (i % 20)), 10);
+
+                if (scrollY === 0) {
+                    letters.forEach((letter, i) => {
+                        const resetDelay = i * 0.06; // same style as your scroll stagger
+                        letter.style.transitionDelay = `${resetDelay}s`;
+                        letter.style.transform = 'translateY(0px)';
+                        letter.style.filter = 'blur(0px)';
+                    });
+                } else {
+                    letter.style.transitionDelay = `${delay}s`;
+                    letter.style.transform = `translateY(${offset}px)`;
+                    letter.style.filter = `blur(${blur}px)`;
+                }
+            });
+
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                // Smoothly reset blur when scrolling stops
+                letters.forEach(letter => {
+                    letter.style.filter = 'blur(0px)';
+                    letter.style.transitionDelay = '0s'; // cancel extra delays on stop
+                });
+            }, 120);
+        });
+
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let menuOpen = false;
+
+        function openMenu() {
+            mobileMenu.style.transform = 'translateY(0)';
+            mobileMenu.classList.add('show');
+            menuOpen = true;
+        }
+
+        function closeMenu() {
+            // Slide down first
+            mobileMenu.style.transform = 'translateY(100%)';
+            mobileMenu.classList.remove('show');
+            menuOpen = false;
+        }
+
+        menuBtn.addEventListener('click', () => {
+            menuOpen ? closeMenu() : openMenu();
+        });
+
+        // Close menu when any link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                closeMenu();
+            });
+        });
+
+        const header = document.querySelector('header.main');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 450) {
+                header.classList.add('bg-eaeaf3');
+            } else {
+                header.classList.remove('bg-eaeaf3');
+            }
+        });
+
+        // Select all fade-group containers
+        const fadeGroups = document.querySelectorAll('.fade-group');
+
+        fadeGroups.forEach(group => {
+            const items = group.querySelectorAll('.fade-in');
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add visible class to the group
+                        group.classList.add('visible');
+
+                        // Stagger each child
+                        items.forEach((item, index) => {
+                            item.style.transitionDelay = `${index * 0.1}s`;
+                        });
+
+                        // Stop observing after animation
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2 // Trigger when 20% visible
+            });
+
+            observer.observe(group);
+        });
+
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
 </body>
 
 </html>
